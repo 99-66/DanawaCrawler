@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "disable_existing_loggers": false,
+  "formatters": {
+    "default": {
+      "format": "%(asctime)s.%(msecs)03d %(levelname)s %(name)s %(funcName)s %(message)s",
+      "datefmt": "%Y-%m-%d %H:%M:%S"
+    }
+  },
+
+  "handlers": {
+    "console": {
+      "class": "logging.StreamHandler",
+      "level": "INFO",
+      "formatter": "default",
+      "stream": "ext://sys.stdout"
+    },
+
+    "log_file_handler": {
+      "class": "logging.handlers.TimedRotatingFileHandler",
+      "level": "INFO",
+      "formatter": "default",
+      "filename": "info.log",
+      "interval": 1,
+      "when": "midnight",
+      "backupCount": 14,
+      "encoding": "utf8"
+    }
+  },
+
+  "loggers": {
+    "my_logger": {
+      "level": "ERROR",
+      "handlers": ["console"],
+      "propagate": false
+    }
+  },
+
+  "root": {
+    "level": "INFO",
+    "handlers": ["console", "log_file_handler"]
+  }
+}
